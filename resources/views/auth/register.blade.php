@@ -44,7 +44,8 @@
                         placeholder="Tu Nombre de Usuario"
                         class="border p-3 w-full rounded-lg @error('name')
                         border-red-500
-                    @enderror"
+                        @enderror"
+                        value="{{ old('username') }}"
                     >
                     @error('username')
                         <p class="bg-red-500 text-white my-1 rounded-lg text-sm p-1 text-center">{{ $message }}</p>
@@ -62,7 +63,8 @@
                         placeholder="Tu Email"
                         class="border p-3 w-full rounded-lg @error('name')
                         border-red-500
-                    @enderror"
+                        @enderror"
+                        value="{{ old('email') }}"
                     >
                     @error('email')
                         <p class="bg-red-500 text-white my-1 rounded-lg text-sm p-1 text-center">{{ $message }}</p>
@@ -80,7 +82,7 @@
                         placeholder="Password"
                         class="border p-3 w-full rounded-lg @error('name')
                         border-red-500
-                    @enderror"
+                        @enderror"
                     >
                     @error('password')
                         <p class="bg-red-500 text-white my-1 rounded-lg text-sm p-1 text-center">{{ $message }}</p>
@@ -98,7 +100,7 @@
                         placeholder="Repite tu Password"
                         class="border p-3 w-full rounded-lg @error('name')
                         border-red-500
-                    @enderror"
+                        @enderror"
                     >
                     @error('password_confirmation')
                         <p class="bg-red-500 text-white my-1 rounded-lg text-sm p-1 text-center">{{ $message }}</p>
