@@ -20,10 +20,17 @@
             <div class="container mx-auto flex justify-between items-center">
                 <h1 class="text-3xl font-black">Devstagram</h1>
 
-                <nav class="flex gap-2 items-center">
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm cursor-pointer">Login</a>
-                    <a href="{{ route('register') }}" class="font-bold uppercase text-gray-600 text-sm cursor-pointer">Register</a>
-                </nav>
+                @auth
+                    @csrf
+                    <form action="{{ route('logout') }}" method="POST">
+                        <button type="submit" class="border-slate-700 text-slate-700 text-3x">Cerrar sesion</button>
+                    </form>
+                @else
+                    <nav class="flex gap-2 items-center">
+                        <a href="{{ route('login') }}" class="font-bold uppercase text-gray-600 text-sm cursor-pointer">Login</a>
+                        <a href="{{ route('register') }}" class="font-bold uppercase text-gray-600 text-sm cursor-pointer">Register</a>
+                    </nav>
+                @endauth
             </div>
         </header>
 
