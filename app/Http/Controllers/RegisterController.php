@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 class RegisterController extends Controller
 {
@@ -13,6 +17,11 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+
+        // Modificar el request para que entre en la validacion de username.unique
+        $request->request->add(['username' => Str::slug( $request->username )]);
+
+
         $this->validate($request,
         [
             'name' => ['required', 'min:3', 'max:20'],
@@ -22,12 +31,25 @@ class RegisterController extends Controller
         ],
         [
             'required' => 'Este campo es requerido',
-            'unique' => 'Este correo ya existe',
+            'email.unique' => 'Este correo ya esta en uso',
+            'username.unique' => 'Ya existe este username',
             'min' => 'Minimo de :min caracteres',
             'max' => 'Maximo de :max caracteres',
             'email' => 'Email no válido',
-            'Confirmed' => 'Las contraseñas no coinciden'
+            'confirmed' => 'Las contraseñas no coinciden'
         ]);
+
+
+
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make( $request->password )
+        ]);
+
+
+
     }
 
 
