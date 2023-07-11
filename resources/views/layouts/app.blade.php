@@ -21,8 +21,8 @@
                 <h1 class="text-3xl font-black">Devstagram</h1>
 
                 @auth
-                    @csrf
                     <form action="{{ route('logout') }}" method="POST">
+                        @csrf
                         <button type="submit" class="border-slate-700 text-slate-700 text-3x">Cerrar sesion</button>
                     </form>
                 @else
