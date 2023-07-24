@@ -30,3 +30,54 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+import Dropzone from 'dropzone';
+
+Dropzone.autoDiscover = false;
+
+const dropzone = new Dropzone('#dropzone', {
+    dictDefaultMessage: 'Sube aqui tu imagen',
+    acceptedFiles: '.png, .jpg, .jpeg',
+    addRemoveLinks: true,
+    dictRemoveFile: 'Eliminar imagen',
+    dictCancelUpload: 'Cancelar subida',
+    maxFiles: 1,
+    uploadMultiple: false,
+    init: function() {
+
+        // Validar si la imagen ya se subio anteriormente para volver a establecerla
+        if( document.querySelector('[name="imagen"]').value.trim().length > 0 ) {
+
+            const imageUploaded = {};
+            imageUploaded.size = 1000;
+            imageUploaded.name = document.querySelector('[name="imagen"]').value.trim();
+
+            // llamar al evento addedfile/thumbnail con la imagen
+            this.options.addedfile.call(this, imageUploaded);
+            this.options.thumbnail.call(
+                this,
+                imageUploaded,
+                `/uploads/${imageUploaded.name}`
+            );
+
+            // agregar estilos/animaciones de subida    
+            imageUploaded.previewElement.classList.add(
+                'dz-success',
+                'dz-complete'
+            );
+        }
+    }
+})
+
+
+
+dropzone.on('success', function(file, response) {
+    // Establecer el nombre de la imagen a subir <4107a607-4e7e-42e9-bc9c-0cb8cffef702.jpg>
+    document.querySelector("[name='imagen']").value = response.imagen
+})
+
+
+dropzone.on('removedfile', function() {
+    // Limpiar nombre de imagen
+    document.querySelector("[name='imagen']").value = ''
+})
