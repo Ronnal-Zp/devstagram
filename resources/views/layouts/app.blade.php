@@ -22,6 +22,8 @@
                 <h1 class="text-3xl font-black">Devstagram</h1>
 
                 @auth
+                    <a class="font-bold text-xl px-5 py-2 rounded-md bg-blue-950 text-white cursor-pointer" href="{{ route('posts.index', auth()->user()) }}">{{ auth()->user()->name }}</a>
+
                     <nav class="flex gap-2 items-center leading-3">
                         <a class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold cursor-pointer" href="{{ route('posts.create') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
