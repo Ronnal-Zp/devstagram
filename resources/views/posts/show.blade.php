@@ -10,7 +10,7 @@
     @endif
 
     <div class="container mx-auto md:flex">
-        <div class="md:w-1/2">
+        <div class="md:w-1/2 p-5">
             <img class="rounded" src="{{ asset('uploads' . '/' . $post->imagen) }}" alt="Imagen del post {{ $post->titulo }}">
 
             <div class="p-3">
@@ -22,6 +22,18 @@
                 <p class="text-sm text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
                 <p class="mt-5">{{ $post->descripcion }}</p>
             </div>
+
+            @auth
+                @if( auth()->user()->id == $user->id)
+                    <div class="px-3 mt-8">
+                        <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input class="bg-red-700 px-4 py-2 text-white cursor-pointer rounded-md" type="submit" value="Eliminar publicacion">
+                        </form>
+                    </div>    
+                @endif
+            @endauth
         </div>
 
 

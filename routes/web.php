@@ -33,9 +33,10 @@ Route::post( '/logout', [LogoutController::class, 'store'])->name('logout');
 
 
 Route::get( '/{user:username}', [PostController::class, 'index'])->name('posts.index');
-Route::get( '/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get( '/{user:username}/post/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get( '/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
+Route::delete('/posts/destroy/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 
 Route::post( '/comment/store/{post}', [CommentController::class, 'store'])->name('comments.store');
