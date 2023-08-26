@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
@@ -57,6 +58,12 @@ Route::delete( '/posts/{post}/like/destroy', [LikeController::class, 'destroy'])
 
 // ============= COMMENT =============
 Route::post( '/posts/comment/store/{post}', [CommentController::class, 'store'])->name('comments.store');
+
+
+// ============== FOLLOW ==============
+Route::post( '/{user}/follow', [FollowerController::class, 'store'])->name('users.follow');
+Route::delete( '/{user}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
+
 
 
 // ============== IMAGE ==============
