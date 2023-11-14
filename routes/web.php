@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
@@ -22,9 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
-});
+Route::get('/', HomeController::class)->name('home');
 
 
 // ============= REGISTER =============
@@ -38,9 +37,8 @@ Route::post( '/login', [LoginController::class, 'store']);
 Route::post( '/logout', [LogoutController::class, 'store'])->name('logout');
 
 
-// ============== PERFIL ==============
-Route::get( '/{user:username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post( '/{user:username}/store', [ProfileController::class, 'store'])->name('profile.store');
+// ============== IMAGE ==============
+Route::post( '/image/store', [ImageController::class, 'store'])->name('image.store');
 
 
 // ============== POSTS ==============
@@ -49,6 +47,11 @@ Route::get( '/{user:username}/post/{post}', [PostController::class, 'show'])->na
 Route::get( '/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
 Route::delete('/posts/destroy/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+
+// ============== PERFIL ==============
+Route::get( '/{user:username}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post( '/{user:username}/store', [ProfileController::class, 'store'])->name('profile.store');
 
 
 // ============== LIKE ==============
@@ -66,6 +69,4 @@ Route::delete( '/{user}/unfollow', [FollowerController::class, 'destroy'])->name
 
 
 
-// ============== IMAGE ==============
-Route::post( '/image/store', [ImageController::class, 'store'])->name('image.store');
 
