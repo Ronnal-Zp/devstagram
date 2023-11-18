@@ -12,6 +12,7 @@
 
         @stack('styles') 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
         {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="{{ asset('js/app.js') }}"></script> --}}
     </head>
@@ -62,5 +63,6 @@
         <footer class="text-center p-5 mt-10 text-gray-500 font-bold uppercase">
             DevStagram - Todos los derechos reservados {{ now()->year }}
         </footer>
+        @livewireScripts
     </body>
 </html>
