@@ -5,7 +5,8 @@
 @endsection
 
 @push('styles')
-    @vite(['resources/css/dropzone_styles.css'])
+    {{-- @vite(['resources/css/dropzone_styles.css']) --}}
+    @vite(['public/css/dropzone_styles.css'])
 @endpush
 
 @section('contenido')
