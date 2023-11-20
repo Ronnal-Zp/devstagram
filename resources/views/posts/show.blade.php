@@ -54,46 +54,7 @@
 
 
         <div class="md:w-1/2 p-5">
-            <div class="shadow rounded bg-white p-5 mb-5">
-
-                @auth()
-                    <p class="text-xl font-bold text-center mb-4">Comenta esta publicacion</p>
-                    <form action="{{ route('comments.store', ['post' => $post]) }}" method="POST" class="flex flex-col justify-center">
-                        @csrf
-                        <textarea
-                            readonly
-                            id="comentario"
-                            name="comentario"
-                            type="text"
-                            class="border p-3 w-full rounded-lg @error('comentario')
-                                border-red-500
-                            @enderror"
-                            required
-                        > </textarea>
-    
-                        @error('comentario')
-                            <p class="bg-red-500 text-white my-1 rounded-lg text-sm p-1 text-center">{{ $message }}</p>
-                        @enderror
-
-                        <input type="submit" value="Comentar" class="bg-sky-600 hover:bg-sky-700 uppercase font-bold mt-2 w-48 block p-3 text-white rounded-lg cursor-pointer self-end">
-                    </form>
-                @endauth
-
-                @if ($post->comments->count() > 0)
-                <div class="bg-white shadow mt-5 max-h-96 overflow-y-scroll">
-                    @foreach ( $post->comments as $comment )
-                        <div class="p-5 border-gray-300 border-b">
-                            <a class="font-bold" href="{{ route('posts.index', $comment->user) }}">{{ $comment->user->username }}</a>
-                            <p>{{ $comment->comentario }}</p>
-                            <p class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
-                        </div>
-                    @endforeach
-                @else
-                <div class="bg-white shadow mt-5 max-h-72">
-                    <p class="p-10 text-center">Aun no hay comentarios</p>
-                @endif
-                </div>
-            </div>
+            <livewire:create-comment :$post>
         </div>
     </div>
 
